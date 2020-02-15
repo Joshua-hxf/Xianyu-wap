@@ -34,6 +34,7 @@ export default {
   name: 'Xyheader',
   data () {
     return {
+      max: 500，
       view: [{
         id: '01',
         name: 'Home',
