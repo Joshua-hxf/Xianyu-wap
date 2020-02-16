@@ -1,8 +1,8 @@
 <template>
 <div>
   <h1 class="xyword-title">{{this.page.wordtitle}}</h1>
-    <div class="subcolumn" v-html='text'>{{page.time}}  
-        <i >&icon</i> 
+    <div class="subcolumn" v-html='text'>{{page.time}}
+        <i >&icon</i>
     {{page.viewer}}</div>
     <div class="xycontent">{{page.content}}</div>
 </div>
@@ -14,14 +14,11 @@ export default {
   max: 500,
   name: 'Xyword',
   props: {
-      page: {}
+    page: {}
   },
   data () {
     return {
     }
-  },
-  props: {
-    // view: Array
   },
   methods: {
   }

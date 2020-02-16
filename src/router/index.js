@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home'
+import xyvue from '../views/VNO/xyvue'
+import vno from '../views/VNO/vno'
 
 Vue.use(VueRouter)
 
@@ -12,19 +14,15 @@ const routes = [
   }, {
     path: '/Vue',
     name: 'Vue',
-    component: Home
+    component: xyvue
   }, {
     path: '/Node',
     name: 'Node',
-    component: Home
+    component: vno
   }, {
     path: '/Other',
     name: 'Other',
-    component: Home
-  }, {
-    path: '/Mood',
-    name: 'Mood',
-    component: Home
+    component: xyvue
   }, {
     path: '/Timeline',
     name: 'Timeline',

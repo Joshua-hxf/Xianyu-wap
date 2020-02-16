@@ -13,19 +13,24 @@
 <script type="text/ecmascript-6">
 import { getNoteList } from '@/api/store'
 import Card from '@/common/card'
+// import { mapState, mapMutations } from 'Vuex'
 
 export default {
-  name: 'vno',
+  name: 'xyvue',
   components: {
     Card
   },
   data () {
     return {
       noteList: [],
-      localpage: 'Node'
+      localpage: ''
     }
   },
   methods: {
+    // ...mapMutations({
+    //   setInputShow: 'SET_INPUTE_SHOW',
+    //   setMessageList: 'SET_MESSAGE_LIST'
+    // }),
     ellipsis (value) {
       if (value.length > 325) {
         return value.slice(0, 325) + '<span>...</span>'
@@ -38,15 +43,18 @@ export default {
       })
     }
   },
+  // computed: {
+  //   ...mapState([
+  //     'inputShow'
+  //   ])
+  // },
   created () {
     this._getNoteList()
-  },
-  mounted () {
-    this.localpage = this.$route.name
   },
   watch: {
     $route (to) {
       this.localpage = to.name
+      this._getNoteList()
     }
   }
 }

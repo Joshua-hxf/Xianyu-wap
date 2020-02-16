@@ -11,6 +11,7 @@
         v-for="page of view"
         :key="page.id"
         :to="page.path || page.name"
+        @click="locktopic"
       >
         {{page.name}}
       </router-link>
@@ -26,6 +27,7 @@
       :key="page.id"
       :to="page.path || page.name"
       :ref="page.name"
+      @click="locktopic(page.name)"
     >
       {{page.name}}
     </router-link>
@@ -77,6 +79,9 @@ export default {
       } else {
         this.overlow = true
       }
+    },
+    locktopic (topic) {
+      this.$store.localpage.commit('changepage', topic)
     }
   },
   watch: {
