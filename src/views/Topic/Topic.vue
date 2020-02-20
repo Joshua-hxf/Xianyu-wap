@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="item in showNoteList" :key="item.id" @click="toNote(item.topic, item.id)">
+    <div v-for="item in noteList" :key="item.id" @click="toNote(item.topic, item.id)">
       <card>
         <div slot="header">
           <div class="note-title">{{ item.title }}</div>
@@ -13,17 +13,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getShowNoteList } from '@/api/store'
+import { getNoteList } from '@/api/store'
 import Card from '@/common/card'
 
 export default {
-  name: 'home',
   components: {
     Card
   },
   data () {
     return {
-      showNoteList: []
+      noteList: [],
+      localpage: ''
     }
   },
   methods: {
@@ -36,16 +36,25 @@ export default {
       }
       return value
     },
-    _getShowNoteList () {
-      getShowNoteList().then((res) => {
-        this.showNoteList = res.data.showNoteList
+    _getNoteList () {
+      getNoteList(this.localpage).then((res) => {
+        this.noteList = res.data.noteList
       })
     }
   },
+
   created () {
-    this._getShowNoteList()
+    this.localpage = this.$route.name
+    this._getNoteList()
+  },
+  watch: {
+    $route (to) {
+      this.localpage = this.$route.name
+      this._getNoteList()
+    }
   }
 }
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

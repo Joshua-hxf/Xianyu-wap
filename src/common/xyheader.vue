@@ -6,11 +6,11 @@
       <!-- 首页链接 -->
       <router-link
         class="headerrouter"
-        :class="{'location': page.name === clickway}"
+        :class="{'location': page.path === clickway}"
         tag="div"
         v-for="page of view"
         :key="page.id"
-        :to="page.path || page.name"
+        :to="page.path"
       >
         {{page.name}}
       </router-link>
@@ -18,14 +18,12 @@
   <transition name="slide-down">
   <div class="headerlinkmin" v-show="!overlow">
     <!-- 公共  -->
-    <!-- <div class="backtop"></div> -->
     <router-link
       class="headerroutermin"
-      :class="{'location': page.name === clickway}"
+      :class="{'location': page.path === clickway}"
       v-for="page of view"
       :key="page.id"
-      :to="page.path || page.name"
-      :ref="page.name"
+      :to="page.path"
     >
       {{page.name}}
     </router-link>
@@ -36,34 +34,42 @@
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'Xyheader',
-  // props:{},
   data () {
     return {
       overlow: true,
-      clickway: 'Home',
+      clickway: '',
       view: [{
         id: '01',
         name: 'Home',
         path: '/'
       }, {
         id: '02',
-        name: 'Vue'
+        name: 'Vue',
+        path: '/vue'
       }, {
         id: '03',
-        name: 'Node'
+        name: 'Node',
+        path: '/node'
       }, {
         id: '04',
-        name: 'Other'
+        name: 'Other',
+        path: '/other'
       },
       {
         id: '05',
-        name: 'Timeline'
+        name: 'Timeline',
+        path: '/timeline'
       }]
     }
   },
   mounted () {
-    this.clickway = this.$route.name
+    setTimeout(() => {
+      if (this.$route.params.topic && this.$route.params.id) {
+        this.clickway = `/${this.$route.params.topic}`
+      } else {
+        this.clickway = this.$route.path
+      }
+    }, 50)
     window.addEventListener('scroll', this.handlescroll)
   },
   destroyed () {
@@ -81,7 +87,12 @@ export default {
   },
   watch: {
     $route (to) {
-      this.clickway = to.name
+      console.log(to)
+      if (to.params.topic && to.params.id) {
+        this.clickway = `/${to.params.topic}`
+      } else {
+        this.clickway = to.path
+      }
     }
   }
 }
@@ -127,9 +138,6 @@ export default {
   text-align center
   color black
   background rgb(238, 238, 238)
-  .backtop
-    width 50px
-    float left
   .headerroutermin
     width 15%
     color rgb(144, 147, 153)
@@ -139,6 +147,7 @@ export default {
     border-bottom-width 2px
     border-bottom-style solid
     border-bottomcolor rgb(153, 153, 153)
+
 .slide-down-enter, .slide-down-leave-to
   transform translate3d(0, -100%, 0)
 .slide-down-enter-to, .slide-down-leave
