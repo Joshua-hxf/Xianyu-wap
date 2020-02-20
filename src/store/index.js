@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    localpage: 'home'
   },
   mutations: {
+    changepage (state, topic) {
+      state.localpage = topic
+    }
   },
   actions: {
   },
