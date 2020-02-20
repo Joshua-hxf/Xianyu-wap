@@ -83,6 +83,9 @@ export default {
       } else {
         this.overlow = true
       }
+    },
+    locktopic (topic) {
+      this.$store.localpage.commit('changepage', topic)
     }
   },
   watch: {
