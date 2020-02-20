@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Xyheader from '@/common/header/xyheader'
+import Xyheader from '@/common/xyheader'
 
 export default {
   components: {
@@ -16,5 +16,7 @@ export default {
 }
 </script>
 <style>
-
+body {
+  margin: 0
+}
 </style>

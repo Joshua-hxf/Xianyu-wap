@@ -16,8 +16,6 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '~@/assets/style/note.css'
-
 .card
   margin 10px
   border-radius 4px

@@ -1,21 +1,10 @@
 <template>
-  <div>
-    <xyheader></xyheader>
-    <xycontent></xycontent>
-  </div>
+  <div>待完成</div>
 </template>
 
 <script type="text/ecmascript-6">
-// import axios from 'axios'
-import Xyheader from '@/common/header/xyheader'
-import Xycontent from './xycontent/xycontent'
 
 export default {
-  name: 'home',
-  components: {
-    Xyheader,
-    Xycontent
-  }
 }
 </script>
 

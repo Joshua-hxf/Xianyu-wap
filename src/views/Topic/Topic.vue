@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div v-for="item in noteList" :key="item.id">
+    <div v-for="item in noteList" :key="item.id" @click="toNote(item.topic, item.id)">
       <card>
-        <div class="note-title">{{ item.title }}</div>
-        <!-- <div class="note-time">{{ item.time.split(' ')[0] }}</div>
-        <div class="note-text" v-html="ellipsis(item.text)" v-highlight></div> -->
+        <div slot="header">
+          <div class="note-title">{{ item.title }}</div>
+          <div class="note-time">{{ item.time.split(' ')[0] }}</div>
+        </div>
+        <div class="note-text" v-html="ellipsis(item.text)" v-highlight></div>
       </card>
     </div>
   </div>
@@ -15,17 +17,19 @@ import { getNoteList } from '@/api/store'
 import Card from '@/common/card'
 
 export default {
-  name: 'vno',
   components: {
     Card
   },
   data () {
     return {
       noteList: [],
-      localpage: 'Node'
+      localpage: ''
     }
   },
   methods: {
+    toNote (topic, id) {
+      this.$router.push(`/${topic}/${id}`)
+    },
     ellipsis (value) {
       if (value.length > 325) {
         return value.slice(0, 325) + '<span>...</span>'
@@ -38,15 +42,15 @@ export default {
       })
     }
   },
+
   created () {
-    this._getNoteList()
-  },
-  mounted () {
     this.localpage = this.$route.name
+    this._getNoteList()
   },
   watch: {
     $route (to) {
-      this.localpage = to.name
+      this.localpage = this.$route.name
+      this._getNoteList()
     }
   }
 }
@@ -54,5 +58,5 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
+@import '~@/assets/style/note.styl'
 </style>
